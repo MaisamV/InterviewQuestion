@@ -1,0 +1,33 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+allprojects {
+    repositories {
+        mavenLocal()
+        maven { url "https://repo1.maven.org/maven2"}
+        mavenCentral()
+        maven {
+            allowInsecureProtocol true
+            url "${System.getenv("artifactory_url")}/$repositoryKey"
+        }
+        google()
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
