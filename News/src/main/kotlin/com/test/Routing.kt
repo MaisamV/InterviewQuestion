@@ -35,6 +35,7 @@ suspend fun PipelineContext<Unit, ApplicationCall>.handleEvent() {
         for (i in 0..c) {
             list.add(NewsFactory.create(i))
         }
+        list.reverse()
         var text = GsonProvider.newsGson.toJson(NewsListDto(true, list, null))
         call.respondText(
             text,
